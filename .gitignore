@@ -1,5 +1,5 @@
 venv/
 __pycache__/
+*.pyc
 db.sqlite3
-staticfiles/
-.env
+india_360_travel_ai_dataset.csv
