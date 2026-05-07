@@ -10,7 +10,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ✅ FIXED PATHS (IMPORTANT)
 MODELS_DIR = BASE_DIR / "ml_models"
 DATA_PATH = BASE_DIR / "india_360_travel_ai_dataset.csv"
-
 SECRET_KEY = 'django-insecure-india360-travel-ai-change-in-production'
 
 DEBUG = True
