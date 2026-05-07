@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}WanderSutra{% endblock %}</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'travel_ai/css/main.css' %}">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <div class="logo">
+                WanderSutra
+            </div>
+
+            <div class="nav-links">
+
+                <a href="{% url 'travel_ai:index' %}">
+                    Planner
+                </a>
+
+                <a href="{% url 'travel_ai:about' %}">
+                    About
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO ONLY FOR HOME PAGE -->
+    {% if request.path == "/" %}
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1 class="main-title">
+                WanderSutra
+            </h1>
+
+            <p class="main-caption">
+                Plan your journey like never before
+            </p>
+
+            <button id="startPlanningBtn" class="start-btn">
+                Start Planning
+            </button>
+
+        </div>
+
+    </section>
+
+    {% endif %}
+
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <div class="container">
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        WanderSutra • Intelligent AI Travel Planning System
+
+    </footer>
+
+
+    <!-- LEAFLET -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- MAIN JS -->
+    <script src="{% static 'travel_ai/js/main.js' %}"></script>
+
+    {% block extra_js %}
+    {% endblock %}
+
+</body>
+</html>

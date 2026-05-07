@@ -1,0 +1,299 @@
+{% extends "travel_ai/base.html" %}
+{% load static %}
+
+{% block title %}
+WanderSutra
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1 class="main-title">
+            WanderSutra
+        </h1>
+
+        <p class="main-caption">
+            Plan your journey like never before
+        </p>
+
+        <button id="startPlanningBtn" class="start-btn">
+            Start Planning
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- PLANNER SECTION -->
+<section id="plannerSection" class="hidden-section">
+
+    <div class="planner-card">
+
+        <div class="planner-header">
+
+            <h2>
+                Create Your Travel Plan
+            </h2>
+
+            <p>
+                Enter your travel preferences to generate intelligent travel insights
+            </p>
+
+        </div>
+
+        <form id="predictForm">
+
+            <div class="planner-grid">
+
+                <!-- FROM -->
+                <div class="input-group">
+
+                    <label>
+                        Starting Location
+                    </label>
+
+                    <select id="source" class="form-control" required>
+
+                        <option value="" disabled selected>
+                            Select source destination
+                        </option>
+
+                        {% for d in destinations %}
+                        <option value="{{ d|lower }}">
+                            {{ d }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- DESTINATION -->
+                <div class="input-group">
+
+                    <label>
+                        Destination
+                    </label>
+
+                    <select id="destination" class="form-control" required>
+
+                        <option value="" disabled selected>
+                            Select travel destination
+                        </option>
+
+                        {% for d in destinations %}
+                        <option value="{{ d|lower }}">
+                            {{ d }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- MONTH -->
+                <div class="input-group">
+
+                    <label>
+                        Travel Month
+                    </label>
+
+                    <select id="month" class="form-control" required>
+
+                        <option value="" disabled selected>
+                            Select month
+                        </option>
+
+                        {% for num, name in month_choices %}
+                        <option value="{{ num }}">
+                            {{ name }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- BUDGET -->
+                <div class="input-group">
+
+                    <label>
+                        Budget Range
+                    </label>
+
+                    <select id="budget" class="form-control" required>
+
+                        <option value="" disabled selected>
+                            Select budget
+                        </option>
+
+                        {% for val, label in budget_choices %}
+                        <option value="{{ val }}">
+                            {{ label }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <button class="generate-btn">
+
+                Generate Smart Travel Plan
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- RESULTS -->
+    <div id="resultsPanel">
+
+        <!-- RESULT HERO -->
+        <div class="result-hero">
+
+            <div>
+
+                <p class="result-label">
+                    Route
+                </p>
+
+                <h2 id="route"></h2>
+
+            </div>
+
+            <div class="confidence-box">
+
+                <p class="result-label">
+                    Prediction Confidence
+                </p>
+
+                <h2 id="confidence"></h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- KPI -->
+        <div class="kpi-grid">
+
+            <div class="kpi-card">
+                <p>Estimated Cost</p>
+                <h3 id="cost"></h3>
+            </div>
+
+            <div class="kpi-card">
+                <p>Recommended Stay</p>
+                <h3 id="stay"></h3>
+            </div>
+
+            <div class="kpi-card">
+                <p>Transport</p>
+                <h3 id="transport"></h3>
+            </div>
+
+            <div class="kpi-card">
+                <p>Best Season</p>
+                <h3 id="season"></h3>
+            </div>
+
+        </div>
+
+
+        <!-- INFO GRID -->
+        <div class="info-grid">
+
+            <!-- WEATHER -->
+            <div class="info-card">
+
+                <h3>
+                    Weather Analysis
+                </h3>
+
+                <div class="info-row">
+                    <span>Temperature</span>
+                    <strong id="temp"></strong>
+                </div>
+
+                <div class="info-row">
+                    <span>Humidity</span>
+                    <strong id="humidity"></strong>
+                </div>
+
+                <div class="info-row">
+                    <span>Rainfall</span>
+                    <strong id="rain"></strong>
+                </div>
+
+            </div>
+
+
+            <!-- AI -->
+            <div class="info-card">
+
+                <h3>
+                    AI Insights
+                </h3>
+
+                <p class="ai-text" id="aiText"></p>
+
+            </div>
+
+        </div>
+
+
+        <!-- MAP -->
+        <div class="map-card">
+
+            <h3>
+                Destination Map
+            </h3>
+
+            <div id="map"></div>
+
+        </div>
+
+
+        <!-- CHARTS -->
+        <div class="chart-grid">
+
+            <div class="chart-card">
+
+                <h3>
+                    Cost Breakdown
+                </h3>
+
+                <canvas id="costChartCanvas"></canvas>
+
+            </div>
+
+            <div class="chart-card">
+
+                <h3>
+                    Weather Conditions
+                </h3>
+
+                <canvas id="weatherChartCanvas"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

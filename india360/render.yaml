@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: wandersutra
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn india360.wsgi:application"
+    envVars:
+      - key: DEBUG
+        value: False

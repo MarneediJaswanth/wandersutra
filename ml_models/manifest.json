@@ -1,0 +1,17 @@
+{
+  "models": [
+    "M01_route_distance",
+    "M02_weather",
+    "M03_risk",
+    "M04_crowd",
+    "M05_transport",
+    "M06_cost_total",
+    "M07_travel_time",
+    "M08_best_days",
+    "M09_duration",
+    "M10_experience",
+    "M11_recommendation",
+    "M12_ranking",
+    "M13_confidence_engine"
+  ]
+}
